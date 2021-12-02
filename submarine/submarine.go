@@ -7,10 +7,10 @@ import (
 )
 
 type Submarine struct {
-	// horizontal
-	X int
-	// depth
-	Y int
+	X     int
+	Depth int
+
+	Aim int
 }
 
 func (s *Submarine) Move(i Instruction) {
@@ -33,23 +33,20 @@ func (s *Submarine) Moves(ins []Instruction) {
 }
 
 func (s *Submarine) Up(i int) {
-	s.Y += i
+	s.Aim += -i
 }
 
 func (s *Submarine) Down(i int) {
-	s.Y += -i
+	s.Aim += i
 }
 
 func (s *Submarine) Forward(i int) {
 	s.X += i
-}
-
-func (s *Submarine) Depth() int {
-	return -s.Y
+	s.Depth += s.Aim * i
 }
 
 func (s *Submarine) String() string {
-	return fmt.Sprintf("Sub{X: %d, Y: %d}", s.X, s.Y)
+	return fmt.Sprintf("Sub{X: %d, Y: %d, Aim: %d}", s.X, s.Depth, s.Aim)
 }
 
 var (

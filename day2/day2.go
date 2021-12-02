@@ -16,7 +16,7 @@ func main() {
 	sub.Moves(instructions)
 
 	fmt.Println(sub)
-	fmt.Println("X * Depth = ", sub.X*sub.Depth())
+	fmt.Println("X * Depth = ", sub.X*sub.Depth)
 }
 
 func parse(r io.Reader) []string {
