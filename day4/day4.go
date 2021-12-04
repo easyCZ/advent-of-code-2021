@@ -16,7 +16,7 @@ func main() {
 		fmt.Println("")
 	}
 
-	lastDraw, winningBoard := Play(draws, boards)
+	lastDraw, winningBoard := PlayToWinFirst(draws, boards)
 	fmt.Println("Last draw:", lastDraw)
 	fmt.Println("Board:", winningBoard)
 	sumUnmarked := winningBoard.SumUnmarked()
@@ -24,7 +24,7 @@ func main() {
 	fmt.Println("Sum unmarked * Last draw:", lastDraw*sumUnmarked)
 }
 
-func Play(draws []int, boards []*BingoBoard) (int, *BingoBoard) {
+func PlayToWinFirst(draws []int, boards []*BingoBoard) (int, *BingoBoard) {
 	for _, draw := range draws {
 		// mark each board, then check who won
 		for _, board := range boards {
