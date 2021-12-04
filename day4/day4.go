@@ -16,7 +16,7 @@ func main() {
 		fmt.Println("")
 	}
 
-	lastDraw, winningBoard := PlayToWinFirst(draws, boards)
+	lastDraw, winningBoard := PlayToLose(draws, boards)
 	fmt.Println("Last draw:", lastDraw)
 	fmt.Println("Board:", winningBoard)
 	sumUnmarked := winningBoard.SumUnmarked()
@@ -34,6 +34,32 @@ func PlayToWinFirst(draws []int, boards []*BingoBoard) (int, *BingoBoard) {
 				return draw, board
 			}
 		}
+	}
+
+	return -1, nil
+}
+
+func PlayToLose(draws []int, boards []*BingoBoard) (int, *BingoBoard) {
+	won := make(map[int]struct{})
+	for _, draw := range draws {
+		// mark each board, then check who won
+		for boardID, board := range boards {
+			if _, alreadyWon := won[boardID]; alreadyWon {
+				continue
+			}
+
+			board.Mark(draw)
+
+			if board.Wins() {
+				won[boardID] = struct{}{}
+
+				if len(won) == len(boards) {
+					// current board was the last one to win
+					return draw, board
+				}
+			}
+		}
+
 	}
 
 	return -1, nil
