@@ -50,11 +50,6 @@ func constantCost(n int) int {
 }
 
 func linearCost(n int) int {
-	if n == 0 {
-		return 0
-	}
-	if n == 1 {
-		return 1
-	}
-	return n + linearCost(n-1)
+	// aka sum of a series
+	return n * (n+1)/2
 }
